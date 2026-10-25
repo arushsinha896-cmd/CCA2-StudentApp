@@ -6,7 +6,7 @@ ASSIGNMENTS = [
     {"id": 1, "title": "Cloud Computing Lab", "course": "Cloud & DevOps",
      "deadline": "2026-10-29", "status": "Completed"},
     {"id": 2, "title": "Computer Networks Project", "course": "Networks",
-     "deadline": "2026-10-31", "status": "Completed"},
+     "deadline": "2026-10-31", "status": "In Progress"},
     {"id": 3, "title": "IoT Practical Assignment", "course": "Internet of Things",
      "deadline": "2026-11-02", "status": "Pending"},
     {"id": 4, "title": "Kubernetes Deployment Lab", "course": "Cloud & DevOps",
