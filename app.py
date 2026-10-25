@@ -2,15 +2,26 @@ from flask import Flask, render_template, jsonify
 
 app = Flask(__name__)
 
-STUDENTS = [
-    {"id": 1, "name": "Aarav Sharma", "course": "Computer Science"},
-    {"id": 2, "name": "Priya Patel", "course": "Information Technology"},
-    {"id": 3, "name": "Rohan Verma", "course": "Computer Science"}
+ASSIGNMENTS = [
+    {"id": 1, "title": "Cloud Computing Lab", "course": "Cloud & DevOps",
+     "deadline": "2026-10-29", "status": "Completed"},
+    {"id": 2, "title": "Computer Networks Project", "course": "Networks",
+     "deadline": "2026-10-31", "status": "In Progress"},
+    {"id": 3, "title": "IoT Practical Assignment", "course": "Internet of Things",
+     "deadline": "2026-11-02", "status": "Pending"},
+    {"id": 4, "title": "Kubernetes Deployment Lab", "course": "Cloud & DevOps",
+     "deadline": "2026-11-05", "status": "Pending"}
 ]
 
 @app.route("/")
 def home():
-    return render_template("index.html", students=STUDENTS)
+    completed = sum(a["status"] == "Completed" for a in ASSIGNMENTS)
+    return render_template(
+        "index.html",
+        assignments=ASSIGNMENTS,
+        completed=completed,
+        total=len(ASSIGNMENTS)
+    )
 
 @app.route("/health")
 def health():

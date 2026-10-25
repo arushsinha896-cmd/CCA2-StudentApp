@@ -1,34 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Student Management</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px auto;
-               max-width: 800px; padding: 20px; background: #f4f7fb; }
-        h1 { color: #244575; }
-        .card { background: white; padding: 24px; border-radius: 12px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
-        th { background: #e8eef8; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LabTrack | Student Lab & Assignment Tracker</title>
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #f3f6fb; color: #243047; }
+header { background: #203b67; color: white; padding: 26px max(24px, calc((100% - 1000px)/2)); }
+header h1 { margin: 0 0 8px; }
+main { max-width: 1000px; margin: 28px auto; padding: 0 20px; }
+.summary { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+.card { background: white; border-radius: 12px; padding: 22px; box-shadow: 0 2px 9px #182b4810; }
+.summary .card { flex: 1; min-width: 180px; }
+.number { font-size: 30px; font-weight: bold; color: #203b67; }
+table { width: 100%; border-collapse: collapse; background: white; }
+th, td { text-align: left; padding: 15px 12px; border-bottom: 1px solid #e7ebf2; }
+th { background: #e9eff8; }
+.status { font-size: 12px; font-weight: bold; padding: 6px 9px; border-radius: 20px; }
+.Completed { background: #d8f5e4; color: #166534; }
+.Pending { background: #fff0cc; color: #8a5700; }
+.In-Progress { background: #dceaff; color: #174ea6; }
+footer { text-align: center; color: #69758a; padding: 28px; }
+</style>
 </head>
 <body>
-    <div class="card">
-        <h1>Student Management System</h1>
-        <p>Welcome! View the registered students below.</p>
-        <table>
-            <tr><th>ID</th><th>Name</th><th>Course</th></tr>
-            {% for student in students %}
-            <tr>
-                <td>{{ student.id }}</td>
-                <td>{{ student.name }}</td>
-                <td>{{ student.course }}</td>
-            </tr>
-            {% endfor %}
-        </table>
-        <p>Total students: {{ students|length }}</p>
-    </div>
+<header>
+<h1>LabTrack</h1>
+<p>Student Lab & Assignment Tracker</p>
+</header>
+<main>
+<div class="summary">
+<div class="card"><p>Total assignments</p><div class="number">{{ total }}</div></div>
+<div class="card"><p>Completed</p><div class="number">{{ completed }}</div></div>
+<div class="card"><p>Remaining</p><div class="number">{{ total - completed }}</div></div>
+</div>
+<div class="card">
+<h2>My Practical Work</h2>
+<table>
+<thead><tr><th>Assignment</th><th>Course</th><th>Deadline</th><th>Status</th></tr></thead>
+<tbody>
+{% for a in assignments %}
+<tr>
+<td>{{ a.title }}</td><td>{{ a.course }}</td><td>{{ a.deadline }}</td>
+<td><span class="status {{ a.status|replace(' ', '-') }}">{{ a.status }}</span></td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+</div>
+</main>
+<footer>LabTrack · Academic Progress at a Glance</footer>
 </body>
 </html>
